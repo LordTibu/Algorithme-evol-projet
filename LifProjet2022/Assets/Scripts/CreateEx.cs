@@ -26,19 +26,29 @@ public class CreateEx : MonoBehaviour
         Object.Instantiate(Eve, new Vector3(x, 1.25f, z), Quaternion.identity);*/
         x = -5;
         //Father = Object.Instantiate(creaturePrefab, new Vector3(x, 0f, z), Quaternion.identity);
+
+        //Creation du Torso
         Clone = Object.Instantiate(bodyPrefab, new Vector3(x,
          bodyPrefab.transform.lossyScale.y / 2, z), Quaternion.identity);
+
+         //Creation d'un bras
         Arm = Object.Instantiate(armPrefab, new Vector3(
          Clone.transform.position.x + (Clone.transform.lossyScale.x + armPrefab.transform.lossyScale.x) / 2,
          0f, z), Quaternion.identity);
+
+        //Rattachement du bras au torse avec un hinge joint
         HingeJoint hJoint = Arm.GetComponent(typeof(HingeJoint)) as HingeJoint;
         hJoint.connectedBody = Clone.GetComponent(typeof(Rigidbody)) as Rigidbody;
         hJoint.connectedAnchor = new Vector3(
          (Clone.transform.lossyScale.x + armPrefab.transform.lossyScale.x) / 2,
           armPrefab.transform.lossyScale.y, 0f);
+        
+        //Creation de l'autre bras
         Arm = Object.Instantiate(armPrefab, new Vector3(
          Clone.transform.position.x - (Clone.transform.lossyScale.x + armPrefab.transform.lossyScale.x) / 2,
          0f, z), Quaternion.identity);
+
+        //Rattachement avec un hinge joint
         HingeJoint h1Joint = Arm.GetComponent(typeof(HingeJoint)) as HingeJoint;
         h1Joint.connectedBody = Clone.GetComponent(typeof(Rigidbody)) as Rigidbody;
         h1Joint.connectedAnchor = new Vector3(
