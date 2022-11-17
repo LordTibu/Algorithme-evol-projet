@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CreatureSpawner : MonoBehaviour
@@ -42,6 +43,11 @@ public class CreatureSpawner : MonoBehaviour
             Vector3 randPos = new Vector3(posXSpread,posYSpread,posZSpread) +  transform.position;
             GameObject Spawn = Instantiate(Creature,randPos, Quaternion.identity);
         }
+    }
+
+    void Update(){
+        if(Input.GetKey("r")) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if(Input.GetKey("p")) Start();
     }
 
 }

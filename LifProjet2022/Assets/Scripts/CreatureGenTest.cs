@@ -51,7 +51,7 @@ public class CreatureGenTest : MonoBehaviour
         fJoint.angularYZDrive= drive;
         fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
 
-        Debug.Log("added a limb to main torso right");
+        Debug.Log("added a limb to main torso left");
         newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
         ConfigurableJoint CJoint = newLimb.GetComponent<ConfigurableJoint>();
         CJoint.anchor = new Vector3(-0.5f,0,0);
