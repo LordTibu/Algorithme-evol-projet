@@ -358,6 +358,14 @@ PrefabInstance:
       value: GenCreatures
       objectReference: {fileID: 0}
     - target: {fileID: 1702372846417994444, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}
+      propertyPath: Spa
+      value: 
+      objectReference: {fileID: 2699426091682700649, guid: a676b48d9bdfb324f8ce032343f73bd4, type: 3}
+    - target: {fileID: 1702372846417994444, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}
+      propertyPath: Spawner
+      value: 
+      objectReference: {fileID: 2699426091682700649, guid: a676b48d9bdfb324f8ce032343f73bd4, type: 3}
+    - target: {fileID: 1702372846417994444, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}
       propertyPath: TypeSpread
       value: 2
       objectReference: {fileID: 0}
@@ -367,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1702372846417994444, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}
       propertyPath: NbCreatures
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1702372846417994447, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}

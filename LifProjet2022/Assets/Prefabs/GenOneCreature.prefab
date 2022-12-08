@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: 7313510130470487296, guid: 4a88cec118dc80b4098b5a3f248e7b79, type: 3}
   limbPrefab:
   - {fileID: 2232444287863837153, guid: d613540dfc875c94990d0ec319d2271c, type: 3}
+  - {fileID: 7603777447151416092, guid: 6ecdffb4516b4c84289494e545de4f1b, type: 3}
+  - {fileID: 2232444287863837153, guid: 6bef2c6cc205bc64eaf5d227f2fbeb6a, type: 3}
 --- !u!54 &7056993693807066431
 Rigidbody:
   m_ObjectHideFlags: 0
