@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting;
+using UnityEngine.SceneManagement;
 
 public class CreatureGenTest : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class CreatureGenTest : MonoBehaviour
     public GameObject limbPrefab;
     GameObject creature, currentTorso, newTorso, currentLimb, newLimb;
     CreatureDNA adn;
-    int randX = 0, randY = 0, randZ = 0;
+    float randX = 0, randY = 0, randZ = 0;
     void Start()
     {   
         //On cree une creature (empty object avec script qui contient des info)
@@ -33,10 +34,13 @@ public class CreatureGenTest : MonoBehaviour
                 limbScale.x * Random.Range(0.1f, 0.8f),
                 limbScale.y * Random.Range(0.1f, 0.8f),
                 limbScale.z * Random.Range(0.1f, 0.8f));
-            randX = (int)Random.Range(0f, currentTorso.transform.localScale.x / 2 + newLimb.transform.localScale.x / 2);
-            randY = (int)Random.Range(newLimb.transform.localScale.y / 2,
+            randX = Random.Range((currentTorso.transform.localScale.x / 2 + newLimb.transform.localScale.x / 2) * -1f,
+             currentTorso.transform.localScale.x / 2 + newLimb.transform.localScale.x / 2);
+            randY = Random.Range(newLimb.transform.localScale.y / 2 + 
+             (currentTorso.transform.localScale.y / 2 + newLimb.transform.localScale.y) * 0f,
              currentTorso.transform.localScale.y / 2 + newLimb.transform.localScale.y / 2);
-            randZ = (int)Random.Range(0f, currentTorso.transform.localScale.z / 2 + newLimb.transform.localScale.z / 2);
+            randZ = Random.Range((currentTorso.transform.localScale.z / 2 + newLimb.transform.localScale.z / 2) * -1f,
+             currentTorso.transform.localScale.z / 2 + newLimb.transform.localScale.z / 2);
             newLimb.transform.position = new Vector3(randX, randY, randZ);
             //On ajoute une fixedJoint pour rattacher les limbs au torso
             FixedJoint fJoint = newLimb.GetComponent<FixedJoint>();
@@ -50,5 +54,11 @@ public class CreatureGenTest : MonoBehaviour
             currentTorso = newTorso;
         }*/
         
+    }
+
+    void Update(){
+        if(Input.GetKey("r")){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }

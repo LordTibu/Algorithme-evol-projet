@@ -17,3 +17,4 @@ public class CubeTestMov : MonoBehaviour
         if(Input.GetKey("d")) ball.AddForce(new Vector3(movForce, 0f, 1f));
     }
 }
+

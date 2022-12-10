@@ -28,4 +28,8 @@ public class CreatureDNA : MonoBehaviour
         Debug.Log("LimbsSelf = " + limbSelfReflec);
         Debug.Log("TorsoSelf = " + torsoSelfReflec);
     }
+
+    public void inContact(Vector3 position){
+        
+    }
 }
