@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537db76e62bb12a4494ef064196545b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  limbNumb: 0
+  limbSelfReflec: 0
+  torsoSelfReflec: 0

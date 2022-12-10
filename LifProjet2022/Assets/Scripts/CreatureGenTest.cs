@@ -5,54 +5,301 @@ using UnityEngine.Scripting;
 using UnityEngine.SceneManagement;
 
 public class CreatureGenTest : MonoBehaviour
-{
+{  
     public GameObject creaturePrefab;
-    public GameObject torsoPrefab;
-    public GameObject limbPrefab;
-    GameObject creature, currentTorso, newTorso, currentLimb, newLimb;
+    public GameObject [] torsoPrefab;
+    public GameObject [] limbPrefab;
+    GameObject creature, currentTorso, newTorso, currentLimb, newLimb, creaturesIN;
+    Vector3 [] tabpos;
     CreatureDNA adn;
-    float randX = 0, randY = 0, randZ = 0;
+    private bool armL= false, armR= false, armT= false, armB= false, armRZ= false, armLZ = false;
+
+    void addArmLeft(){
+        armL = true;
+        newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
+        ConfigurableJoint fJoint = newLimb.GetComponent<ConfigurableJoint>();
+        fJoint.anchor = new Vector3(0.5f,0,0);
+        int randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularXMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularYMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularZMotion= ConfigurableJointMotion.Free;       
+        }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
+        fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
+        Debug.Log("added a limb to main torso left");
+    }
+
+    void addArmRight() {
+        armR = true;
+        newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
+        ConfigurableJoint fJoint = newLimb.GetComponent<ConfigurableJoint>();
+        fJoint.anchor = new Vector3(-0.5f,0,0);
+        int randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularXMotion= ConfigurableJointMotion.Free;        
+        }
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularYMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularZMotion= ConfigurableJointMotion.Free;       
+        }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
+        fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
+        
+        Debug.Log("added a limb to main torso right");
+    }
+
+    void addArmRightZ() {
+        armRZ =true;
+        newLimb = Object.Instantiate(limbPrefab[2], transform.position, Quaternion.identity, currentTorso.transform);
+        ConfigurableJoint fJoint = newLimb.GetComponent<ConfigurableJoint>();
+        fJoint.anchor = new Vector3(0,0,-0.5f);
+        int randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularXMotion= ConfigurableJointMotion.Free;        
+        }
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularYMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularZMotion= ConfigurableJointMotion.Free;       
+        }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
+        fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
+        
+        Debug.Log("added a limb to main torso rightZZZ");
+    }
+
+    void addArmLeftZ() {
+        armLZ = true;
+        newLimb = Object.Instantiate(limbPrefab[2], transform.position, Quaternion.identity, currentTorso.transform);
+        ConfigurableJoint fJoint = newLimb.GetComponent<ConfigurableJoint>();
+        fJoint.anchor = new Vector3(0,0,0.5f);
+        int randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularXMotion= ConfigurableJointMotion.Free;        
+        }
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularYMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularZMotion= ConfigurableJointMotion.Free;       
+        }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
+        fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
+        
+        Debug.Log("added a limb to main torso leftZZZ");
+    }
+
+    void addArmTop () {
+        armT=true;
+        newLimb = Object.Instantiate(limbPrefab[1], transform.position, Quaternion.identity, currentTorso.transform);
+        ConfigurableJoint fJoint = newLimb.GetComponent<ConfigurableJoint>();
+        fJoint.anchor = new Vector3(0, -0.8f,0);
+        int randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularXMotion= ConfigurableJointMotion.Free;        
+        }
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularYMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularZMotion= ConfigurableJointMotion.Free;       
+        }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
+        fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
+        Debug.Log("added a limb to main torso TOP");
+    }
+
+    void addArmBottom() {armB= true;
+        newLimb = Object.Instantiate(limbPrefab[1], transform.position, Quaternion.identity, currentTorso.transform);
+        ConfigurableJoint fJoint = newLimb.GetComponent<ConfigurableJoint>();
+        fJoint.anchor = new Vector3(0,0.8f,0);
+        int randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularXMotion= ConfigurableJointMotion.Free;        
+        }
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularYMotion= ConfigurableJointMotion.Free;        
+        }
+
+        randL = Random.Range(0,2);
+        if (randL == 0)
+        {
+            fJoint.angularZMotion= ConfigurableJointMotion.Free;       
+        }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
+        fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
+        
+        Debug.Log("added a limb to main torso DOWN");
+    }
+
+    void addRandLim () {
+        int randL = Random.Range(0,6);
+                    switch(randL){
+                        case 0: if(!armT){
+                                    addArmTop();
+                                }else {
+                                    addRandLim (); 
+                                    }
+                                    break;
+                                
+                        case 1: if(!armB){
+                                    addArmBottom();
+                                }else {
+                                    addRandLim () ;
+                                    }
+                                    break;
+                        case 2: if(!armL){
+                                    addArmLeft();
+                                }else {
+                                    addRandLim () ;
+                                    }
+                                    break;
+                        case 3: if(!armR){
+                                    addArmRight();
+                                }else {
+                                    addRandLim () ;
+                                    } 
+                                    break;
+                        case 4: if(!armRZ){
+                                    addArmRightZ();
+                                }else {
+                                    addRandLim () ;
+                                    } 
+                                    break;
+                        case 5: if(!armLZ){
+                                    addArmLeftZ();
+                                }else {
+                                    addRandLim () ;
+                                    } 
+                                    break;
+                    }
+    }
+
     void Start()
-    {   
+    {    
         //On cree une creature (empty object avec script qui contient des info)
-        creature = Object.Instantiate(creaturePrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        creature = Object.Instantiate(creaturePrefab, transform.position, Quaternion.identity);
         //On recupéré les données (qui sont crées aléatoirement en appelant la function .create() )
         adn = creature.GetComponent<CreatureDNA>();
         adn.create();
         //On crée un torso; fils de creature
-        currentTorso = Object.Instantiate(torsoPrefab, new Vector3(0f, 0.5f, 0f), Quaternion.identity, creature.transform);
-        //On ajoute les "bras" ou Limbs avec des rotations, positions et dimensions aleatoires (toujours en contact avec torso)
-        for(int i = 0; i < adn.limbNumb; i++){
-            Debug.Log("added a limb to main torso");
-            newLimb = Object.Instantiate(limbPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(
-                Random.Range(0f, 360f),
-                Random.Range(0f, 360f),
-                Random.Range(0f, 360f)
-            ), currentTorso.transform);
-            Vector3 limbScale = newLimb.transform.localScale;
-            newLimb.transform.localScale = new Vector3(
-                limbScale.x * Random.Range(0.1f, 0.8f),
-                limbScale.y * Random.Range(0.1f, 0.8f),
-                limbScale.z * Random.Range(0.1f, 0.8f));
-            randX = Random.Range((currentTorso.transform.localScale.x / 2 + newLimb.transform.localScale.x / 2) * -1f,
-             currentTorso.transform.localScale.x / 2 + newLimb.transform.localScale.x / 2);
-            randY = Random.Range(newLimb.transform.localScale.y / 2 + 
-             (currentTorso.transform.localScale.y / 2 + newLimb.transform.localScale.y) * 0f,
-             currentTorso.transform.localScale.y / 2 + newLimb.transform.localScale.y / 2);
-            randZ = Random.Range((currentTorso.transform.localScale.z / 2 + newLimb.transform.localScale.z / 2) * -1f,
-             currentTorso.transform.localScale.z / 2 + newLimb.transform.localScale.z / 2);
-            newLimb.transform.position = new Vector3(randX, randY, randZ);
-            //On ajoute une fixedJoint pour rattacher les limbs au torso
-            FixedJoint fJoint = newLimb.GetComponent<FixedJoint>();
-            fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
-        }
-        /*for(int i = 0; i < adn.torsoSelfReflec; i++){
-            newTorso = Object.Instantiate(torsoPrefab, new Vector3(0f, 0.5f, 0f), Quaternion.identity, creature.transform);
-            for(int y = 0; y < adn.limbNumb; y++){
-                newLimb = Object.Instantiate(limbPrefab, new Vector3(0f, 2f, 0f), Quaternion.identity, currentTorso.transform);
+        currentTorso = Object.Instantiate(torsoPrefab[0], transform.position, Quaternion.identity, creature.transform);
+        int rand;
+        if(adn.limbNumb > 0 && adn.limbNumb < 7){ //Dependiendo del numero de limbs que alla  (min 0, max 6) pone aleatoriamente un numero exacto de miembros 
+            for(int i = 0; i< adn.limbNumb; i ++)
+            {
+                addRandLim();
             }
-            currentTorso = newTorso;
-        }*/
+        } else {
+            rand = Random.Range(1, 7); // Si queremos aleatoriedad solo toca poner el numero de limbs diferente a  1;6 
+                                        // para que genere una creatura con miembros aleatorios
+            for(int i = 0; i< rand; i ++)
+            {
+                addRandLim();
+            }
+        }
         
     }
 
