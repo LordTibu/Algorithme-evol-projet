@@ -303,6 +303,32 @@ public class CreatureGenTest : MonoBehaviour
         
     }
 
+    void mierdas()
+    {    
+        //On cree une creature (empty object avec script qui contient des info)
+        creature = Object.Instantiate(creaturePrefab, transform.position, Quaternion.identity);
+        //On recupéré les données (qui sont crées aléatoirement en appelant la function .create() )
+        adn = creature.GetComponent<CreatureDNA>();
+        adn.create();
+        //On crée un torso; fils de creature
+        currentTorso = Object.Instantiate(torsoPrefab[0], transform.position, Quaternion.identity, creature.transform);
+        int rand;
+        if(adn.limbNumb > 0 && adn.limbNumb < 7){ //Dependiendo del numero de limbs que alla  (min 0, max 6) pone aleatoriamente un numero exacto de miembros 
+            for(int i = 0; i< adn.limbNumb; i ++)
+            {
+                addRandLim();
+            }
+        } else {
+            rand = Random.Range(1, 7); // Si queremos aleatoriedad solo toca poner el numero de limbs diferente a  1;6 
+                                        // para que genere una creatura con miembros aleatorios
+            for(int i = 0; i< rand; i ++)
+            {
+                addRandLim();
+            }
+        }
+        
+    }
+
     void Update(){
         if(Input.GetKey("r")){
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
