@@ -375,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1702372846417994444, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}
       propertyPath: NbCreatures
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1702372846417994447, guid: 246b9ea766bb7ee478da680e51b73de6, type: 3}
