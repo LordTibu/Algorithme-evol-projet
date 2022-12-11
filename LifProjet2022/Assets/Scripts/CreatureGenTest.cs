@@ -168,7 +168,7 @@ public class CreatureGenTest : MonoBehaviour
                         case 0: if(!armT){ // si il y a pas un bras sur le torse en top 
                                     addArm(0);
                                 }else {
-                                    addArmSelf(0);
+                                    //addArmSelf(0);
                                     addRandLim(); 
                                     }
                                     break;
@@ -176,35 +176,35 @@ public class CreatureGenTest : MonoBehaviour
                         case 1: if(!armB){
                                     addArm(1);
                                 }else {
-                                    addArmSelf(1);
+                                    //addArmSelf(1);
                                     addRandLim () ;
                                     }
                                     break;
                         case 2: if(!armL){
                                     addArm(2);
                                 }else {
-                                    addArmSelf(2);
+                                    //addArmSelf(2);
                                     addRandLim () ;
                                     }
                                     break;
                         case 3: if(!armR){
                                     addArm(3);
                                 }else {
-                                    addArmSelf(3);
+                                    //addArmSelf(3);
                                     addRandLim () ;
                                     } 
                                     break;
                         case 4: if(!armRZ){
                                     addArm(4);
                                 }else {
-                                    addArmSelf(4);
+                                    //addArmSelf(4);
                                     addRandLim () ;
                                     } 
                                     break;
                         case 5: if(!armLZ){
                                     addArm(5);
                                 }else {
-                                    addArmSelf(5);
+                                    //addArmSelf(5);
                                     addRandLim () ;
                                     } 
                                     break;
