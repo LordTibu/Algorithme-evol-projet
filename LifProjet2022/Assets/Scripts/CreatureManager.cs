@@ -5,23 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class CreatureManager : MonoBehaviour
 {
-    public GameObject Eve = null;      // The creature used to create new creatures
-    //public GameObject Target;
-    //public CreatureController Champion;
-
+    public GameObject Eve = null;// The creature used to create new creatures
     public int NUMBER_OF_CREATURES = 48;
     //Number of individuals per generation
     public float PARENT_THRESHOLD = 0.5f;
     //Percentage of the best individuals who can become parents
     //Ex. 0.5f => The better half of the current generation can become parents
     private List<CreatureController> creatures;
+    //List holding all of the individuals in a given generation
 
-    public static float MUTATION_RATE = 0.02f;
+    //public static float MUTATION_RATE = 0.02f;
     public static int SPACE_BETWEEN = 18;
+    //Physical space between creatures in the grid when creating a generation
 
     public static float TIME_LIMIT = 300;
+    //Time before creating a new generation (in seconds)
     private float timeLeft = TIME_LIMIT;
+    //Timer used for the countdown
     public int generation = 0;
+    //Counts the number of generations
     void Start()
     {
         if(PARENT_THRESHOLD > 1) PARENT_THRESHOLD = 0.5f;
@@ -38,6 +40,7 @@ public class CreatureManager : MonoBehaviour
         int sqr = (int)Mathf.Sqrt((float) NUMBER_OF_CREATURES);
         int x = 0, z = 0;
         for(int i = 0; i < NUMBER_OF_CREATURES; i++){
+            //Creating the first generation
             position[0] = x * SPACE_BETWEEN;
             position[2] = z * SPACE_BETWEEN;
             GameObject currentIndividual = Instantiate(Eve, position, Quaternion.identity);
@@ -82,7 +85,7 @@ public class CreatureManager : MonoBehaviour
             position[0] = x * SPACE_BETWEEN;
             position[2] = z * SPACE_BETWEEN;
             //On ajoute le reste des new creatures dans le tab.
-            //1. Select two random parent between the x% best individuals
+            //1. Select two random parents between the PARENT_THRESHOLD% best individuals
             rand1 = (int) Random.Range(0, PARENT_THRESHOLD * NUMBER_OF_CREATURES);
             rand2 = (int) Random.Range(0, PARENT_THRESHOLD * NUMBER_OF_CREATURES);
             while(rand1 == rand2) rand2 = (int) Random.Range(0, PARENT_THRESHOLD * NUMBER_OF_CREATURES);
@@ -108,6 +111,8 @@ public class CreatureManager : MonoBehaviour
     }
 
     public void calculateFitness(){
+        //Calculate fitness of each individual and sorting the list in order of most to less fit
+        //Ex. Creatures[0] should have the higger fitness at the end
         for(int i = 0; i < NUMBER_OF_CREATURES; i++){
             creatures[i].calculateFitness();
         }
@@ -135,7 +140,7 @@ public class CreatureManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Restart the whole experiment 
+        //Restart the whole experiment (Solo usar para tests)
         if(Input.GetKey("r")) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if(Input.GetKey("f")) calculateFitness();
         if(Input.GetKey("k")) killCurrentGen(0);
