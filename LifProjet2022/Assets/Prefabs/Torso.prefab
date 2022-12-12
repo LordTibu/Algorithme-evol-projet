@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2058571040538323354}
   - component: {fileID: 2058571040538323349}
   - component: {fileID: 1756020939}
-  - component: {fileID: 6815048877571063060}
+  - component: {fileID: -4916264332132626303}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &6815048877571063060
+--- !u!114 &-4916264332132626303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,8 +124,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2058571040538323348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c0dfc6593a4c043b344913164c752d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a1035ebb06e4b844a9f51a5a5815770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1756020939}
-  movForce: 50
+  limbPrefab:
+  - {fileID: 7603777447151416092, guid: 6ecdffb4516b4c84289494e545de4f1b, type: 3}
+  - {fileID: 2232444287863837153, guid: d613540dfc875c94990d0ec319d2271c, type: 3}
+  - {fileID: 2232444287863837153, guid: 6bef2c6cc205bc64eaf5d227f2fbeb6a, type: 3}
+  limb: {fileID: 7603777447151416092, guid: 6ecdffb4516b4c84289494e545de4f1b, type: 3}
