@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limbPrefab:
-  - {fileID: 7603777447151416092, guid: 6ecdffb4516b4c84289494e545de4f1b, type: 3}
   - {fileID: 2232444287863837153, guid: d613540dfc875c94990d0ec319d2271c, type: 3}
-  - {fileID: 2232444287863837153, guid: 6bef2c6cc205bc64eaf5d227f2fbeb6a, type: 3}
-  limb: {fileID: 7603777447151416092, guid: 6ecdffb4516b4c84289494e545de4f1b, type: 3}
+  limbNumb: 0
+  fitnessScore: 0
+  startPosition: {x: 0, y: 0, z: 0}

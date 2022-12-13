@@ -33,12 +33,14 @@ public class CreatureController : MonoBehaviour
         ConfigurableJoint fJoint = null;
         switch(n){ // 0 top, 1 Bottom, 2 left, 3 right, 4 rightz, 5 leftz
             case 0 :armT = true; 
-                    newLimb = Object.Instantiate(limbPrefab[1], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb.transform.localScale = new Vector3(0.25f,1.25f,0.25f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(0, 0.2f - currentTorso.transform.localScale.y,0);
                     break;
             case 1 :armB = true;
-                    newLimb = Object.Instantiate(limbPrefab[1], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb.transform.localScale = new Vector3(0.25f,1.25f,0.25f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(0,currentTorso.transform.localScale.y - 0.2f,0);
                     break;
@@ -53,12 +55,14 @@ public class CreatureController : MonoBehaviour
                     fJoint.anchor = new Vector3(0.2f - currentTorso.transform.localScale.x,0,0);
                     break;
             case 4 :armRZ = true;
-                    newLimb = Object.Instantiate(limbPrefab[2], transform.position, Quaternion.identity, currentTorso.transform);
-                    fJoint = newLimb.GetComponent<ConfigurableJoint>(); 
+                    newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb.transform.localScale = new Vector3(0.23f,0.23f,1.41f);
+                    fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(0,0,0.2f -currentTorso.transform.localScale.z);
                     break;
             case 5 :armLZ = true;
-                    newLimb = Object.Instantiate(limbPrefab[2], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
+                    newLimb.transform.localScale = new Vector3(0.23f,0.23f,1.41f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();  
                     fJoint.anchor = new Vector3(0,0,currentTorso.transform.localScale.z - 0.2f);
                     break;
@@ -97,12 +101,10 @@ public class CreatureController : MonoBehaviour
 
     void addRandLim() {
         int randL = Random.Range(0,6);
-        int randLL = Random.Range(0, 2);
                     switch(randL){
                         case 0: if(!armT){ // si il y a pas un bras sur le torse en top 
                                     addArm(0);
                                 }else {
-                                    //addArmSelf(0);
                                     addRandLim(); 
                                     }
                                     break;
@@ -110,35 +112,30 @@ public class CreatureController : MonoBehaviour
                         case 1: if(!armB){
                                     addArm(1);
                                 }else {
-                                    //addArmSelf(1);
                                     addRandLim () ;
                                     }
                                     break;
                         case 2: if(!armL){
                                     addArm(2);
                                 }else {
-                                    //addArmSelf(2);
                                     addRandLim () ;
                                     }
                                     break;
                         case 3: if(!armR){
                                     addArm(3);
                                 }else {
-                                    //addArmSelf(3);
                                     addRandLim () ;
                                     } 
                                     break;
                         case 4: if(!armRZ){
                                     addArm(4);
                                 }else {
-                                    //addArmSelf(4);
                                     addRandLim () ;
                                     } 
                                     break;
                         case 5: if(!armLZ){
                                     addArm(5);
                                 }else {
-                                    //addArmSelf(5);
                                     addRandLim () ;
                                     } 
                                     break;

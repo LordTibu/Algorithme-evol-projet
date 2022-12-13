@@ -38,10 +38,11 @@ public class CreatureManager : MonoBehaviour
     void initCreatures(){
         Vector3 position = Eve.transform.position;
         int sqr = (int)Mathf.Sqrt((float) NUMBER_OF_CREATURES);
-        int x = 0, z = 0;
+        int x = 0,y=5, z = 0;
         for(int i = 0; i < NUMBER_OF_CREATURES; i++){
             //Creating the first generation
             position[0] = x * SPACE_BETWEEN;
+            position[1] = y;
             position[2] = z * SPACE_BETWEEN;
             GameObject currentIndividual = Instantiate(Eve, position, Quaternion.identity);
             CreatureController copy = currentIndividual.GetComponent<CreatureController>();
