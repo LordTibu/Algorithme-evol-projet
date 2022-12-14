@@ -11,7 +11,10 @@ public class CreatureController : MonoBehaviour
     public int limbNumbSelf;
     public float fitnessScore;
     public Vector3 startPosition;
-    public int MUTATION = 20;
+    public int MUTATION = 8;
+    //Chance of mutating the parameters of a limb
+    public int NORMALITY = 95;
+    //Chance of keeping a parents limb instead of random mutant one
     void Start()
     {
         currentTorso = this.gameObject;
@@ -305,25 +308,37 @@ public class CreatureController : MonoBehaviour
             for(int i = 0; i < pmin; i++){
                 r = Random.Range(0, 2);
                 if(r == 0){
-                    nino = Instantiate(parent1.transform.GetChild(i).gameObject, this.transform);
-                    nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
-                    r = Random.Range(0, MUTATION);
-                    if(r == 0) mutate(nino);
+                    r = Random.Range(0, 100);
+                    if(r <= NORMALITY){
+                        nino = Instantiate(parent1.transform.GetChild(i).gameObject, this.transform);
+                        nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
+                        if(r <= MUTATION) mutate(nino);
+                        nino.name = "limb";
+                    }
+                    else addArm(Random.Range(0,6));
                 }
                 else {
-                    nino = Instantiate(parent2.transform.GetChild(i).gameObject, this.transform);
-                    nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
-                    r = Random.Range(0, MUTATION);
-                    if(r == 0) mutate(nino);
+                    r = Random.Range(0, 100);
+                    if(r < NORMALITY){
+                        nino = Instantiate(parent2.transform.GetChild(i).gameObject, this.transform);
+                        nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
+                        if(r <= MUTATION) mutate(nino);
+                        nino.name = "limb";
+                    }
+                    else addArm(Random.Range(0,6));
                 }
             }
             for(int i = pmin; i < pmax; i++){
                 r = Random.Range(0, 2);
                 if(r == 0){
-                    nino = Instantiate(maxParent.transform.GetChild(i).gameObject, this.transform);
-                    nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
-                    r = Random.Range(0, MUTATION);
-                    if(r == 0) mutate(nino);
+                    r = Random.Range(0, 100);
+                    if(r <= NORMALITY){
+                        nino = Instantiate(maxParent.transform.GetChild(i).gameObject, this.transform);
+                        nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
+                        if(r <= MUTATION) mutate(nino);
+                        nino.name = "limb";
+                    }
+                    else addArm(Random.Range(0,6));
                 }
             }
         }
@@ -332,12 +347,6 @@ public class CreatureController : MonoBehaviour
     public void mutate(GameObject limb){
         int r = 1;
         ConfigurableJoint fJoint = limb.GetComponent<ConfigurableJoint>();
-        r = Random.Range(0,2);
-        if(r == 0){
-            //mutate new limb
-            addArm(Random.Range(0,6));
-        }
-        else{
         r = Random.Range(0,2);
         if (r == 0)
         {fJoint.angularXMotion= ConfigurableJointMotion.Free;        }
@@ -356,7 +365,6 @@ public class CreatureController : MonoBehaviour
         drive2.positionDamper = Random.Range(0,5);
         fJoint.angularYZDrive= drive;
         fJoint.angularXDrive= drive2;
-        }
     }
 
     public void kill(){
