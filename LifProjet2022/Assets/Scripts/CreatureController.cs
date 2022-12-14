@@ -11,6 +11,7 @@ public class CreatureController : MonoBehaviour
     public int limbNumbSelf;
     public float fitnessScore;
     public Vector3 startPosition;
+    public int MUTATION = 20;
     void Start()
     {
         currentTorso = this.gameObject;
@@ -26,7 +27,6 @@ public class CreatureController : MonoBehaviour
             addRandLim();
         }
         //addRandLimTest(rand);
-        Debug.Log("L  "+armL+" R  "+ armR+" T  "+ armT+" B  "+ armB+" RZ  "+ armRZ+" LZ  "+ armLZ);
     }
 
     // Update is called once per frame
@@ -98,8 +98,6 @@ public class CreatureController : MonoBehaviour
         fJoint.angularYZDrive= drive;
         fJoint.angularXDrive= drive2;
         fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
-        
-        //Debug.Log("added a limb to main torso");
     }
 
     void addArmSelf(int n){
@@ -198,7 +196,6 @@ public class CreatureController : MonoBehaviour
                                     addArmSelf(0); 
                                     }
                                     break;
-                                
                         case 1: if(armB == 0){
                                     addArm(1);
                                 }else {
@@ -283,11 +280,11 @@ public class CreatureController : MonoBehaviour
 
 
 
-    public void calculateFitness(){
+    public float calculateFitness(){
         startPosition[1] = 0;
         Vector3 currentPos = this.transform.position;
         currentPos[1] = 0;
-        fitnessScore = Vector3.Distance(currentPos, startPosition);
+        return fitnessScore = Vector3.Distance(currentPos, startPosition);
     }
 
     public void reSpawn(){
@@ -310,10 +307,14 @@ public class CreatureController : MonoBehaviour
                 if(r == 0){
                     nino = Instantiate(parent1.transform.GetChild(i).gameObject, this.transform);
                     nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
+                    r = Random.Range(0, MUTATION);
+                    if(r == 0) mutate(nino);
                 }
                 else {
                     nino = Instantiate(parent2.transform.GetChild(i).gameObject, this.transform);
                     nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
+                    r = Random.Range(0, MUTATION);
+                    if(r == 0) mutate(nino);
                 }
             }
             for(int i = pmin; i < pmax; i++){
@@ -321,6 +322,8 @@ public class CreatureController : MonoBehaviour
                 if(r == 0){
                     nino = Instantiate(maxParent.transform.GetChild(i).gameObject, this.transform);
                     nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
+                    r = Random.Range(0, MUTATION);
+                    if(r == 0) mutate(nino);
                 }
             }
         }
@@ -328,12 +331,31 @@ public class CreatureController : MonoBehaviour
 
     public void mutate(GameObject limb){
         int r = 1;
-        r = Random.Range(0,10);
+        ConfigurableJoint fJoint = limb.GetComponent<ConfigurableJoint>();
+        r = Random.Range(0,2);
         if(r == 0){
             //mutate new limb
+            addArm(Random.Range(0,6));
         }
         else{
-            //mutate controllers inside limb
+        r = Random.Range(0,2);
+        if (r == 0)
+        {fJoint.angularXMotion= ConfigurableJointMotion.Free;        }
+        r = Random.Range(0,2);
+        if (r == 0) {fJoint.angularYMotion= ConfigurableJointMotion.Free;        }
+        r = Random.Range(0,2);
+        if (r == 0) {fJoint.angularZMotion= ConfigurableJointMotion.Free;       }
+
+        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+        fJoint.targetAngularVelocity = Vel;
+        JointDrive drive = fJoint.slerpDrive;
+        JointDrive drive2 = fJoint.slerpDrive;
+        drive.positionSpring = Random.Range(0,9);
+        drive.positionDamper = Random.Range(0,5);
+        drive2.positionSpring = Random.Range(0,9);
+        drive2.positionDamper = Random.Range(0,5);
+        fJoint.angularYZDrive= drive;
+        fJoint.angularXDrive= drive2;
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class CreatureManager : MonoBehaviour
 {
@@ -11,18 +12,22 @@ public class CreatureManager : MonoBehaviour
     public float PARENT_THRESHOLD = 0.5f;
     //Percentage of the best individuals who can become parents
     //Ex. 0.5f => The better half of the current generation can become parents
-    private List<CreatureController> creatures;
+    public List<CreatureController> creatures;
     //List holding all of the individuals in a given generation
 
     //public static float MUTATION_RATE = 0.02f;
-    public static int SPACE_BETWEEN = 18;
+    public int SPACE_BETWEEN = 18;
     //Physical space between creatures in the grid when creating a generation
 
-    public static float TIME_LIMIT = 300;
+    public float TIME_LIMIT = 300;
     //Time before creating a new generation (in seconds)
-    private float timeLeft = TIME_LIMIT;
+    private float timeLeft;
     //Timer used for the countdown
     public int generation = 0;
+    public float fitnessSum = 0;
+    public float fitnessMax = 0;
+    private string logginPath;
+    private string expName;
     //Counts the number of generations
     void Start()
     {
@@ -33,16 +38,18 @@ public class CreatureManager : MonoBehaviour
         }
         creatures = new List<CreatureController>();
         initCreatures();
+        initLog();
+        timeLeft = TIME_LIMIT;
     }
 
     void initCreatures(){
         Vector3 position = Eve.transform.position;
         int sqr = (int)Mathf.Sqrt((float) NUMBER_OF_CREATURES);
-        int x = 0,y=5, z = 0;
+        int x = 0, z = 0;
+        position[1] = 5;
         for(int i = 0; i < NUMBER_OF_CREATURES; i++){
             //Creating the first generation
             position[0] = x * SPACE_BETWEEN;
-            position[1] = y;
             position[2] = z * SPACE_BETWEEN;
             GameObject currentIndividual = Instantiate(Eve, position, Quaternion.identity);
             CreatureController copy = currentIndividual.GetComponent<CreatureController>();
@@ -65,12 +72,14 @@ public class CreatureManager : MonoBehaviour
         int rand1, rand2;
         Vector3 position = Vector3.zero;
         calculateFitness();
+        logGen();
         
         //On preserve le meilleur 10% des creatures
         int ten = (int)(0.1 * NUMBER_OF_CREATURES);
         int ninety = (int)(0.9 * NUMBER_OF_CREATURES);
         int sqr = (int)Mathf.Sqrt((float) NUMBER_OF_CREATURES);
         int x = 0, z = 0;
+        position[1] = 5;
         if(ten + ninety < NUMBER_OF_CREATURES) ten += 1;
         for(int i = 0; i < ten; i++){
             position[0] = x * SPACE_BETWEEN;
@@ -112,10 +121,14 @@ public class CreatureManager : MonoBehaviour
     }
 
     public void calculateFitness(){
+        fitnessSum = fitnessMax = 0;
+        float f = 0;
         //Calculate fitness of each individual and sorting the list in order of most to less fit
         //Ex. Creatures[0] should have the higger fitness at the end
         for(int i = 0; i < NUMBER_OF_CREATURES; i++){
-            creatures[i].calculateFitness();
+            f = creatures[i].calculateFitness();
+            fitnessSum += f;
+            if(fitnessMax <= f) fitnessMax = f;
         }
         for(int i = 1; i < NUMBER_OF_CREATURES; i++)
         {
@@ -138,6 +151,23 @@ public class CreatureManager : MonoBehaviour
         creatures.Clear();
     }
 
+    public void initLog(){
+        int x = 0;
+        logginPath = Application.dataPath + "/Experiment_Logs/Experiment_";
+        while(File.Exists(logginPath + x + ".txt")) x++;
+        expName = "Experiment_" + x + ".png";
+        logginPath = logginPath + x +".txt";
+        File.WriteAllText(logginPath, "Begin Experiment\n\n");
+    }
+
+    public void logGen(){
+        string textS;
+        textS = "Generation: " + generation + "\r\n" +
+        "Max fitness: " + fitnessMax + "\r\n" +
+        "Average fitness: " + fitnessSum/NUMBER_OF_CREATURES + "\r\n";
+        File.AppendAllText(logginPath, textS);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -149,7 +179,6 @@ public class CreatureManager : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if(timeLeft <= 0){
             makeNewGeneration();
-            Debug.Log(TIME_LIMIT + " seconds have passed");
             timeLeft = TIME_LIMIT;
         }
     }
