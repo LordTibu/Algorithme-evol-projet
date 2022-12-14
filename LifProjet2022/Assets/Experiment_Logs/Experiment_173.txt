@@ -1,0 +1,5 @@
+Begin Experiment
+
+Generation: 1
+Max fitness: 18.05871
+Average fitness: 18.05871

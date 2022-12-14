@@ -1,0 +1,47 @@
+Begin Experiment
+
+Generation: 1
+Max fitness: 1099.17
+Average fitness: 49.464
+Generation: 2
+Max fitness: 62.02617
+Average fitness: 25.52717
+Generation: 3
+Max fitness: 187.2698
+Average fitness: 37.59233
+Generation: 4
+Max fitness: 121.8059
+Average fitness: 64.11184
+Generation: 5
+Max fitness: 121.1907
+Average fitness: 65.81694
+Generation: 6
+Max fitness: 179.4063
+Average fitness: 73.02661
+Generation: 7
+Max fitness: 172.2142
+Average fitness: 73.35381
+Generation: 8
+Max fitness: 266.0059
+Average fitness: 97.00541
+Generation: 9
+Max fitness: 167.0925
+Average fitness: 86.54503
+Generation: 10
+Max fitness: 208.2706
+Average fitness: 79.83657
+Generation: 11
+Max fitness: 197.9859
+Average fitness: 74.15111
+Generation: 12
+Max fitness: 174.4989
+Average fitness: 72.44402
+Generation: 13
+Max fitness: 201.617
+Average fitness: 89.88525
+Generation: 14
+Max fitness: 215.4674
+Average fitness: 71.327
+Generation: 15
+Max fitness: 224.6432
+Average fitness: 81.08285
