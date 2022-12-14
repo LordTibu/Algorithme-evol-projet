@@ -29,7 +29,6 @@ public class CreatureController : MonoBehaviour
         for(int i = 0 ; i < rand; i++){
             addRandLim();
         }
-
     }
 
     // Update is called once per frame
@@ -119,6 +118,10 @@ public class CreatureController : MonoBehaviour
                     }
                     break;
         }
+        float randx = Random.Range(0.23f,1.42f);
+        float randy = Random.Range(0.23f,1.26f);
+        float randz = Random.Range(0.23f,1.42f);
+        newLimb.transform.localScale = new Vector3(randx,randy,randz);
         int randL = Random.Range(0,2);
         if (randL == 0)
         {
@@ -159,6 +162,10 @@ public class CreatureController : MonoBehaviour
         Debug.Log(connection.transform.position);
         newRefLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, connection.transform);
         newRefLimb.transform.localScale = currentLimb.transform.localScale;
+        float randx = Random.Range(0.23f,1.42f);
+        float randy = Random.Range(0.23f,1.26f);
+        float randz = Random.Range(0.23f,1.42f);
+        newRefLimb.transform.localScale = new Vector3(randx,randy,randz);
         fJoint = newRefLimb.GetComponent<ConfigurableJoint>();
 
         switch(n){
