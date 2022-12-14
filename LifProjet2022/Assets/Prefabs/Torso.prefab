@@ -31,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,7 +113,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &-4916264332132626303
 MonoBehaviour:
@@ -130,5 +130,6 @@ MonoBehaviour:
   limbPrefab:
   - {fileID: 2232444287863837153, guid: d613540dfc875c94990d0ec319d2271c, type: 3}
   limbNumb: 0
+  limbNumbSelf: 0
   fitnessScore: 0
   startPosition: {x: 0, y: 0, z: 0}
