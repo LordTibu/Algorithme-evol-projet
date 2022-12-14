@@ -629,10 +629,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Eve: {fileID: 2058571040538323348, guid: 4b7201bae0d24ed4ba7766f96f22728f, type: 3}
   NUMBER_OF_CREATURES: 50
-  PARENT_THRESHOLD: 0.25
+  PARENT_THRESHOLD: 0.4
   creatures: []
   SPACE_BETWEEN: 18
-  TIME_LIMIT: 15
+  TIME_LIMIT: 150
   generation: 0
   fitnessSum: 0
   fitnessMax: 0
@@ -743,7 +743,7 @@ Transform:
   m_GameObject: {fileID: 1538689957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50, y: 0, z: 50}
-  m_LocalScale: {x: 1000, y: 1, z: 1000}
+  m_LocalScale: {x: 3000, y: 1, z: 3000}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

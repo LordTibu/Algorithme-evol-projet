@@ -1,23 +1,5 @@
 Begin Experiment
 
 Generation: 1
-Max fitness: 39.12933
-Average fitness: 7.418632
-Generation: 2
-Max fitness: 76.71967
-Average fitness: 17.15868
-Generation: 3
-Max fitness: 94.7751
-Average fitness: 24.10462
-Generation: 4
-Max fitness: 109.1857
-Average fitness: 40.01791
-Generation: 5
-Max fitness: 89.3404
-Average fitness: 43.59494
-Generation: 6
-Max fitness: 75.19661
-Average fitness: 46.31622
-Generation: 7
-Max fitness: 78.03598
-Average fitness: 60.79585
+Max fitness: 582.7115
+Average fitness: 136.2349
