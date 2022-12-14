@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eve: {fileID: 2058571040538323348, guid: 4b7201bae0d24ed4ba7766f96f22728f, type: 3}
-  NUMBER_OF_CREATURES: 48
+  NUMBER_OF_CREATURES: 40
   PARENT_THRESHOLD: 0.5
   generation: 0
 --- !u!4 &1288580700
