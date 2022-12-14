@@ -17,8 +17,6 @@ public class CreatureController : MonoBehaviour
     }
 
     public void init(){
-        //Por mi santa madre no borres esta linea, se q deberia ser redundante pero no lo es,
-        //y no entiendo pq, pero NO la borres
         currentTorso = this.gameObject;
         int rand = Random.Range(1, 7);
         limbNumb = rand;
@@ -155,7 +153,6 @@ public class CreatureController : MonoBehaviour
 
     public void crossover(GameObject parent1, GameObject parent2){
         // Sexo 
-        //(repito, NO BORRAR ESTA LINEA, ni aunq el cielo se caiga la toques)
         currentTorso = this.gameObject;
         if(parent1 != null && parent2 != null){
             GameObject nino;
@@ -186,8 +183,15 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    public void mutate(){
-        //Servi de algo y llena esto como lleno a tu mama por las noches
+    public void mutate(GameObject limb){
+        int r = 1;
+        r = Random.Range(0,10);
+        if(r == 0){
+            //mutate new limb
+        }
+        else{
+            //mutate controllers inside limb
+        }
     }
 
     public void kill(){

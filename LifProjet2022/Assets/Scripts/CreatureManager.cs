@@ -86,7 +86,7 @@ public class CreatureManager : MonoBehaviour
             position[0] = x * SPACE_BETWEEN;
             position[2] = z * SPACE_BETWEEN;
             //On ajoute le reste des new creatures dans le tab.
-            //1. Select two random parents between the PARENT_THRESHOLD% best individuals
+            //1. Select two random parents in the PARENT_THRESHOLD% best individuals
             rand1 = (int) Random.Range(0, PARENT_THRESHOLD * NUMBER_OF_CREATURES);
             rand2 = (int) Random.Range(0, PARENT_THRESHOLD * NUMBER_OF_CREATURES);
             while(rand1 == rand2) rand2 = (int) Random.Range(0, PARENT_THRESHOLD * NUMBER_OF_CREATURES);
