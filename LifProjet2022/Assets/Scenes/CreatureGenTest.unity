@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eve: {fileID: 2058571040538323348, guid: 4b7201bae0d24ed4ba7766f96f22728f, type: 3}
-  NUMBER_OF_CREATURES: 50
+  NUMBER_OF_CREATURES: 1
   PARENT_THRESHOLD: 0.25
   creatures: []
   SPACE_BETWEEN: 18

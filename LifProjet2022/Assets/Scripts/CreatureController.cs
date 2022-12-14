@@ -29,48 +29,94 @@ public class CreatureController : MonoBehaviour
         for(int i = 0 ; i < rand; i++){
             addRandLim();
         }
-        //addRandLimTest(rand);
+
     }
 
     // Update is called once per frame
     void addArm(int n) {
         ConfigurableJoint fJoint = null;
+        int rand1 = Random.Range(0,2);
+        int rand2 = Random.Range(0,2);
         switch(n){ // 0 top, 1 Bottom, 2 left, 3 right, 4 rightz, 5 leftz
             case 0 :armT ++; 
                     newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
                     newLimb.transform.localScale = new Vector3(0.25f,1.25f,0.25f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(0, 0.2f - currentTorso.transform.localScale.y,0);
+                    if(rand1 == 1){
+                        addArmSelf(0);
+                        armT++;
+                    } 
+                    if(rand2 == 1){
+                        addArmSelf(0);
+                        armT++;
+                    }
                     break;
             case 1 :armB ++;
                     newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
                     newLimb.transform.localScale = new Vector3(0.25f,1.25f,0.25f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(0,currentTorso.transform.localScale.y - 0.2f,0);
+                    if(rand1 == 1){
+                        addArmSelf(1);
+                        armB++;
+                    }
                     break;
             case 2 :armL ++;
                     newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
                     newLimb.transform.localScale = new Vector3(1.41f,0.23f,0.23f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(currentTorso.transform.localScale.x - 0.2f,0,0);
+                    if(rand1 == 1){
+                        addArmSelf(2);
+                        armL++;
+                    } 
+                    if(rand2 == 1){
+                        addArmSelf(2);
+                        armL++;
+                    }
                     break;
             case 3 :armR ++;
                     newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
                     newLimb.transform.localScale = new Vector3(1.41f,0.23f,0.23f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>(); 
                     fJoint.anchor = new Vector3(0.2f - currentTorso.transform.localScale.x,0,0);
+                    if(rand1 == 1){
+                        addArmSelf(3);
+                        armR++;
+                    } 
+                    if(rand2 == 1){
+                        addArmSelf(3);
+                        armR++;
+                    }
                     break;
             case 4 :armRZ ++;
                     newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
                     newLimb.transform.localScale = new Vector3(0.23f,0.23f,1.41f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();
                     fJoint.anchor = new Vector3(0,0,0.2f -currentTorso.transform.localScale.z);
+                    if(rand1 == 1){
+                        addArmSelf(4);
+                        armRZ++;
+                    } 
+                    if(rand2 == 1){
+                        addArmSelf(4);
+                        armRZ++;
+                    }
                     break;
             case 5 :armLZ ++;
                     newLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, currentTorso.transform);
                     newLimb.transform.localScale = new Vector3(0.23f,0.23f,1.41f);
                     fJoint = newLimb.GetComponent<ConfigurableJoint>();  
                     fJoint.anchor = new Vector3(0,0,currentTorso.transform.localScale.z - 0.2f);
+                    if(rand1 == 1){
+                        addArmSelf(5);
+                        armLZ++;
+                    } 
+                    if(rand2 == 1){
+                        addArmSelf(5);
+                        armLZ++;
+                    }
                     break;
         }
         int randL = Random.Range(0,2);
@@ -94,10 +140,10 @@ public class CreatureController : MonoBehaviour
         fJoint.targetAngularVelocity = Vel;
         JointDrive drive = fJoint.slerpDrive;
         JointDrive drive2 = fJoint.slerpDrive;
-        drive.positionSpring = Random.Range(0,9);
-        drive.positionDamper = Random.Range(0,5);
-        drive2.positionSpring = Random.Range(0,9);
-        drive2.positionDamper = Random.Range(0,5);
+        drive.positionSpring = Random.Range(0,19f);
+        drive.positionDamper = Random.Range(0,17f);
+        drive2.positionSpring = Random.Range(0,19f);
+        drive2.positionDamper = Random.Range(0,17f);
         fJoint.angularYZDrive= drive;
         fJoint.angularXDrive= drive2;
         fJoint.connectedBody = currentTorso.GetComponent<Rigidbody>();
@@ -106,7 +152,6 @@ public class CreatureController : MonoBehaviour
     void addArmSelf(int n){
         
         ConfigurableJoint fJoint = null;
-        ConfigurableJoint CurrentLimJoint;
         currentLimb = newLimb;
         connection = new GameObject("Connection");
         connection.transform.parent = currentLimb.transform;
@@ -114,7 +159,6 @@ public class CreatureController : MonoBehaviour
         Debug.Log(connection.transform.position);
         newRefLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, connection.transform);
         newRefLimb.transform.localScale = currentLimb.transform.localScale;
-        CurrentLimJoint = currentLimb.GetComponent<ConfigurableJoint>();
         fJoint = newRefLimb.GetComponent<ConfigurableJoint>();
 
         switch(n){
@@ -178,61 +222,16 @@ public class CreatureController : MonoBehaviour
         fJoint.targetAngularVelocity = Vel;
         JointDrive drive = fJoint.slerpDrive;
         JointDrive drive2 = fJoint.slerpDrive;
-        drive.positionSpring = Random.Range(0,9);
-        drive.positionDamper = Random.Range(0,5);
-        drive2.positionSpring = Random.Range(0,9);
-        drive2.positionDamper = Random.Range(0,5);
+        drive.positionSpring = Random.Range(0,19f);
+        drive.positionDamper = Random.Range(0,17f);
+        drive2.positionSpring = Random.Range(0,19f);
+        drive2.positionDamper = Random.Range(0,17f);
         fJoint.angularYZDrive= drive;
         fJoint.angularXDrive= drive2;
         fJoint.connectedBody = currentLimb.GetComponent<Rigidbody>();
         newLimb = newRefLimb;
     }
 
-    void addRandLimTest(int nlimb) {
-        int randL;
-        for(int i=0; i < nlimb ; i++){
-            randL = Random.Range(0,6);
-            switch(randL){
-                        case 0: if(armT == 0){ // si il y a pas un bras sur le torse en top 
-                                    addArm(0);
-                                }else {
-                                    addArmSelf(0); 
-                                    }
-                                    break;
-                        case 1: if(armB == 0){
-                                    addArm(1);
-                                }else {
-                                    addArmSelf(1) ;
-                                    }
-                                    break;
-                        case 2: if(armL == 0){
-                                    addArm(2);
-                                }else {
-                                    addArmSelf(2);
-                                    }
-                                    break;
-                        case 3: if(armR == 0){
-                                    addArm(3);
-                                }else {
-                                    addArmSelf(3);
-                                    } 
-                                    break;
-                        case 4: if(armRZ == 0 ){
-                                    addArm(4);
-                                }else {
-                                    addArmSelf(4);
-                                    } 
-                                    break;
-                        case 5: if(armLZ == 0){
-                                    addArm(5);
-                                }else {
-                                    addArmSelf(5);
-                                    } 
-                                    break;
-                    }
-        }
-                    
-    }
 
     void addRandLim() {
         int randL;
@@ -278,10 +277,6 @@ public class CreatureController : MonoBehaviour
                     }
                     
     }
-
-    
-
-
 
     public float calculateFitness(){
         startPosition[1] = 0;
