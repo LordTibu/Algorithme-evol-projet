@@ -632,7 +632,7 @@ MonoBehaviour:
   PARENT_THRESHOLD: 0.4
   creatures: []
   SPACE_BETWEEN: 18
-  TIME_LIMIT: 150
+  TIME_LIMIT: 10
   generation: 0
   fitnessSum: 0
   fitnessMax: 0

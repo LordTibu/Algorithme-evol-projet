@@ -133,3 +133,5 @@ MonoBehaviour:
   limbNumbSelf: 0
   fitnessScore: 0
   startPosition: {x: 0, y: 0, z: 0}
+  MUTATION: 15
+  NORMALITY: 90

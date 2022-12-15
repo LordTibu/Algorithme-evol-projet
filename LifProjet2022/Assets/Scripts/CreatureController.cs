@@ -11,9 +11,9 @@ public class CreatureController : MonoBehaviour
     public int limbNumbSelf;
     public float fitnessScore;
     public Vector3 startPosition;
-    public int MUTATION = 8;
+    public int MUTATION;
     //Chance of mutating the parameters of a limb
-    public int NORMALITY = 95;
+    public int NORMALITY;
     //Chance of keeping a parents limb instead of random mutant one
     void Start()
     {
@@ -157,9 +157,9 @@ public class CreatureController : MonoBehaviour
         ConfigurableJoint fJoint = null;
         currentLimb = newLimb;
         connection = new GameObject("Connection");
+        connection.tag = "pepino";
         connection.transform.parent = currentLimb.transform;
         connection.transform.localPosition = currentLimb.transform.localPosition;
-        Debug.Log(connection.transform.position);
         newRefLimb = Object.Instantiate(limbPrefab[0], transform.position, Quaternion.identity, connection.transform);
         newRefLimb.transform.localScale = currentLimb.transform.localScale;
         float randx = Random.Range(0.23f,1.42f);
@@ -172,37 +172,31 @@ public class CreatureController : MonoBehaviour
             case 0:
                     fJoint.anchor = new Vector3(0, -currentTorso.transform.localScale.y/2,0);
                     fJoint.connectedAnchor = new Vector3(0, currentTorso.transform.localScale.y/2,0);
-                    Debug.Log("added a limb to self reflc top");
                     armT ++;
                     break;
             case 1: 
                     fJoint.anchor = new Vector3(0,currentTorso.transform.localScale.y/2,0);
                     fJoint.connectedAnchor = new Vector3(0, -currentTorso.transform.localScale.y/2,0);
-                    Debug.Log("added a limb to self reflc bottom");
                     armB ++;
                     break;
             case 2:
                     fJoint.anchor = new Vector3(currentTorso.transform.localScale.x/2, 0,0);
                     fJoint.connectedAnchor = new Vector3(-currentTorso.transform.localScale.x/2, 0,0);
-                    Debug.Log("added a limb to self reflc left");
                     armL ++;
                     break; 
             case 3:
                     fJoint.anchor = new Vector3(-currentTorso.transform.localScale.x/2, 0,0);
                     fJoint.connectedAnchor = new Vector3(currentTorso.transform.localScale.x/2, 0,0);
-                    Debug.Log("added a limb to self reflc right");
                     armR ++;
                     break;
             case 4:
                     fJoint.anchor = new Vector3(0,0,-currentTorso.transform.localScale.z/2);
                     fJoint.connectedAnchor = new Vector3(0, 0,currentTorso.transform.localScale.z/2);
-                    Debug.Log("added a limb to self reflc rightz");
                     armRZ ++;
                     break;
             case 5:
                     fJoint.anchor = new Vector3(0,0,currentTorso.transform.localScale.z/2);
                     fJoint.connectedAnchor = new Vector3(0, 0,-currentTorso.transform.localScale.z/2);
-                    Debug.Log("added a limb to self reflc leftz");
                     armLZ++;
                     break;
         }
@@ -311,13 +305,17 @@ public class CreatureController : MonoBehaviour
                 r = Random.Range(0, 2);
                 if(r == 0){
                     r = Random.Range(0, 100);
-                    if(r <= NORMALITY){
+                    if(r < NORMALITY){
                         nino = Instantiate(parent1.transform.GetChild(i).gameObject, this.transform);
                         nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
-                        if(r <= MUTATION) mutate(nino);
+                        if(r < MUTATION) mutate(nino);
                         nino.name = "limb";
+                        for(int y = 0; y < nino.transform.childCount; y++){
+                            r = Random.Range(0, 100);
+                            if(r < MUTATION && nino.transform.GetChild(y).tag != "pepino") mutate(nino.transform.GetChild(y).gameObject);
+                        }
                     }
-                    else addArm(Random.Range(0,6));
+                    else if(Random.Range(0,2) == 0) addArm(Random.Range(0,6));
                 }
                 else {
                     r = Random.Range(0, 100);
@@ -326,8 +324,12 @@ public class CreatureController : MonoBehaviour
                         nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
                         if(r <= MUTATION) mutate(nino);
                         nino.name = "limb";
+                        for(int y = 0; y < nino.transform.childCount; y++){
+                            r = Random.Range(0, 100);
+                            if(r < MUTATION && nino.transform.GetChild(y).tag != "pepino") mutate(nino.transform.GetChild(y).gameObject);
+                        }
                     }
-                    else addArm(Random.Range(0,6));
+                    else if(Random.Range(0,2) == 0) addArm(Random.Range(0,6));
                 }
             }
             for(int i = pmin; i < pmax; i++){
@@ -339,6 +341,10 @@ public class CreatureController : MonoBehaviour
                         nino.GetComponent<ConfigurableJoint>().connectedBody = currentTorso.GetComponent<Rigidbody>();
                         if(r <= MUTATION) mutate(nino);
                         nino.name = "limb";
+                        for(int y = 0; y < nino.transform.childCount; y++){
+                            r = Random.Range(0, 100);
+                            if(r < MUTATION && nino.transform.GetChild(y).gameObject.tag != "pepino") mutate(nino.transform.GetChild(y).gameObject);
+                        }
                     }
                     else addArm(Random.Range(0,6));
                 }
@@ -348,25 +354,31 @@ public class CreatureController : MonoBehaviour
 
     public void mutate(GameObject limb){
         int r = 1;
+        float randx = Random.Range(0.23f,1.42f);
+        float randy = Random.Range(0.23f,1.26f);
+        float randz = Random.Range(0.23f,1.42f);
+        limb.transform.localScale = new Vector3(randx,randy,randz);
         ConfigurableJoint fJoint = limb.GetComponent<ConfigurableJoint>();
-        r = Random.Range(0,2);
-        if (r == 0)
-        {fJoint.angularXMotion= ConfigurableJointMotion.Free;        }
-        r = Random.Range(0,2);
-        if (r == 0) {fJoint.angularYMotion= ConfigurableJointMotion.Free;        }
-        r = Random.Range(0,2);
-        if (r == 0) {fJoint.angularZMotion= ConfigurableJointMotion.Free;       }
+        if(fJoint){
+            r = Random.Range(0,2);
+            if (r == 0)
+            {fJoint.angularXMotion= ConfigurableJointMotion.Free;        }
+            r = Random.Range(0,2);
+            if (r == 0) {fJoint.angularYMotion= ConfigurableJointMotion.Free;        }
+            r = Random.Range(0,2);
+            if (r == 0) {fJoint.angularZMotion= ConfigurableJointMotion.Free;       }
 
-        Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
-        fJoint.targetAngularVelocity = Vel;
-        JointDrive drive = fJoint.slerpDrive;
-        JointDrive drive2 = fJoint.slerpDrive;
-        drive.positionSpring = Random.Range(0,9);
-        drive.positionDamper = Random.Range(0,5);
-        drive2.positionSpring = Random.Range(0,9);
-        drive2.positionDamper = Random.Range(0,5);
-        fJoint.angularYZDrive= drive;
-        fJoint.angularXDrive= drive2;
+            Vector3 Vel= new Vector3 (Random.Range(0f,21f),Random.Range(0f,21f),Random.Range(0f,21f));
+            fJoint.targetAngularVelocity = Vel;
+            JointDrive drive = fJoint.slerpDrive;
+            JointDrive drive2 = fJoint.slerpDrive;
+            drive.positionSpring = Random.Range(0,9);
+            drive.positionDamper = Random.Range(0,5);
+            drive2.positionSpring = Random.Range(0,9);
+            drive2.positionDamper = Random.Range(0,5);
+            fJoint.angularYZDrive= drive;
+            fJoint.angularXDrive= drive2;
+        }
     }
 
     public void kill(){

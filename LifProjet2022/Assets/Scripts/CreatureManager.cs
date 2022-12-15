@@ -7,9 +7,9 @@ using System.IO;
 public class CreatureManager : MonoBehaviour
 {
     public GameObject Eve = null;// The creature used to create new creatures
-    public int NUMBER_OF_CREATURES = 48;
+    public int NUMBER_OF_CREATURES;
     //Number of individuals per generation
-    public float PARENT_THRESHOLD = 0.5f;
+    public float PARENT_THRESHOLD;
     //Percentage of the best individuals who can become parents
     //Ex. 0.5f => The better half of the current generation can become parents
     public List<CreatureController> creatures;
