@@ -10,7 +10,7 @@ Ouvrir le fichier avec Unity
    ```
   Unity
    ```
-## Description du jeu
+## Description 
 
 Ce projet est destiné à être le rendu final de l’UE LIFPROJET, où on a choisi le sujet
 animation physique et optimisation de la morphologie de créatures animées.
