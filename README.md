@@ -28,6 +28,9 @@ en 4 taches principaux :
 ```
 Plus d'info dans [Rapport](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Rapport.pdf)
 
+##Rendu
+![rendu](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Images/movie_003.gif?raw=true)
+
 ## Autheurs
 Nicolas Patino
 
