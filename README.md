@@ -1,5 +1,7 @@
 # LIFPROJET 2022
 
+![screen](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Images/for.png?raw=true)
+
 ### Execution
 
 ```
@@ -24,6 +26,7 @@ en 4 taches principaux :
 • Croisement des créatures
 • Mutation
 ```
+Plus d'info dans [Rapport](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Rapport.pdf)
 
 ## Autheurs
 Nicolas Patino
