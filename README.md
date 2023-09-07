@@ -5,33 +5,33 @@
 ### Execution
 
 ```
-Ouvrir le fichier avec Unity
+Open file with Unity
 ```
 
-## Pre-requis :
+## Prerequisites :
    ```
   Unity
    ```
 ## Description 
 
-Ce projet est destiné à être le rendu final de l’UE LIFPROJET, où on a choisi le sujet
-animation physique et optimisation de la morphologie de créatures animées.
-Dans ce contexte on a choisi d’appliquer des algorithmes évolutionnistes à un problème
-de génération de créatures qui cherche à pouvoir se déplacer le plus long possible par
-rapport a son apparition. Pour la conception de ce projet on a décidé de diviser le sujet
-en 4 taches principaux :
+This project is intended to be the final rendering of the LIFPROJET UE, where we have chosen the topic
+physical animation and morphology optimization of animated creatures.
+In this context, we have chosen to apply evolutionary algorithms to a problem
+of generating creatures that seek to move as long as possible in relation to their
+its appearance. To design this project, we decided to divide the subject into
+into 4 main tasks:
 ```
-• Génération d’une créature simple
-• Complexification de la créature
-• Croisement des créatures
-• Mutation
+- Simple creature generation
+- Creature complexity
+- Crossbreeding creatures
+- Mutation
 ```
-Plus d'info dans [Rapport](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Rapport.pdf)
+More info in [Report](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Rapport.pdf)
 
-## Rendu
-![rendu](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Images/movie_003.gif?raw=true)
+## Rendering
+![render](https://github.com/LordTibu/Algorithme-evol-projet/blob/main/Images/movie_003.gif?raw=true)
 
-## Autheurs
+## Authors
 Nicolas Patino
 
 Juan C. Lenis
